@@ -25,7 +25,6 @@ function TicTacToe() {
   }
 
   function resetGame() {
-    console.log(status);
     let initialStatus = [
       ["", "", ""],
       ["", "", ""],

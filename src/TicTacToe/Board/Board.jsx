@@ -4,13 +4,13 @@ import { GameContext } from "../TicTacToe";
 
 function Board({ boardState, handleBoardChange }) {
   const [currentSign, setCurrentSign] = useState("x");
-  let counter = 0;
-
   const { gameState } = useContext(GameContext);
+
+  let counter = 0;
 
   function handleClick(i, j) {
     let newBoardState = [...boardState];
-    console.log(gameState.isActive);
+
     if (gameState.isActive && newBoardState[i][j] == "") {
       newBoardState[i][j] = currentSign;
       handleBoardChange(newBoardState);
