@@ -11,15 +11,14 @@ const status = [
 ];
 
 function TicTacToe() {
-  const [currentBoardStatus, setCurrentBoardStatus] = useState(status);
-
   const [gameState, setGameState] = useState({
     isActive: true,
     winner: "",
+    currentBoardStatus: status,
   });
 
   function boardChangeHandler(boardState: any) {
-    setCurrentBoardStatus(boardState);
+    gameState.currentBoardStatus = boardState;
     let gameWinner = analyseGame(boardState);
     if (gameWinner)
       setGameState({ ...gameState, isActive: false, winner: gameWinner });
@@ -27,12 +26,17 @@ function TicTacToe() {
 
   function resetGame() {
     console.log(status);
-    setCurrentBoardStatus([
+    let initialStatus = [
       ["", "", ""],
       ["", "", ""],
       ["", "", ""],
-    ]);
-    setGameState({ ...gameState, isActive: true, winner: "" });
+    ];
+    setGameState({
+      ...gameState,
+      isActive: true,
+      winner: "",
+      currentBoardStatus: initialStatus,
+    });
   }
 
   return (
@@ -41,7 +45,7 @@ function TicTacToe() {
         <h3>Tic Tac Toe Example</h3>
         <button onClick={resetGame}>Reset</button>
         <Board
-          boardState={currentBoardStatus}
+          boardState={gameState.currentBoardStatus}
           handleBoardChange={boardChangeHandler}
         />
         <h2>
