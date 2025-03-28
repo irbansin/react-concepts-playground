@@ -19,7 +19,11 @@ function TicTacToe() {
 
   function resetGame() {
     console.log(status)
-    setCurrentBoardStatus(status)
+    setCurrentBoardStatus([
+      ['', '', ''],
+      ['', '', ''],
+      ['', '', ''],
+    ])
   }
 
   return (
