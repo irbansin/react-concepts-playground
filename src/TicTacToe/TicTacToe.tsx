@@ -12,17 +12,17 @@ const status = [
 
 function TicTacToe() {
   const [currentBoardStatus, setCurrentBoardStatus] = useState(status);
-  const [gameStatus, setGameStatus] = useState("Start Game");
 
   const [gameState, setGameState] = useState({
     isActive: true,
+    winner: "",
   });
 
   function boardChangeHandler(boardState: any) {
     setCurrentBoardStatus(boardState);
     let gameWinner = analyseGame(boardState);
-    setGameStatus(gameWinner);
-    if (gameWinner) setGameState({ isActive: false });
+    if (gameWinner)
+      setGameState({ ...gameState, isActive: false, winner: gameWinner });
   }
 
   function resetGame() {
@@ -32,6 +32,7 @@ function TicTacToe() {
       ["", "", ""],
       ["", "", ""],
     ]);
+    setGameState({ ...gameState, isActive: true, winner: "" });
   }
 
   return (
@@ -43,7 +44,9 @@ function TicTacToe() {
           boardState={currentBoardStatus}
           handleBoardChange={boardChangeHandler}
         />
-        <h2>{gameStatus ? `Winner is ${gameStatus}` : ""}</h2>
+        <h2>
+          {gameState.winner.length ? `Winner is ${gameState.winner}` : ""}
+        </h2>
       </GameContext.Provider>
     </>
   );
