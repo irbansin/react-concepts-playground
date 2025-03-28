@@ -1,8 +1,9 @@
 import { createContext, useState } from "react";
 import Board from "./Board/Board";
 import analyseGame from "./utils/gameAnalyser";
+import { GameContextType } from "../model";
 
-export const GameContext = createContext(null);
+export const GameContext = createContext<GameContextType | null>(null);
 
 const status = [
   ["", "", ""],

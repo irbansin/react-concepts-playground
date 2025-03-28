@@ -2,16 +2,18 @@ import { useContext, useState } from "react";
 import styles from "./Board.module.css";
 import { GameContext } from "../TicTacToe";
 
-function Board({ boardState, handleBoardChange }) {
+function Board({ boardState, handleBoardChange }: any) {
   const [currentSign, setCurrentSign] = useState("x");
-  const { gameState } = useContext(GameContext);
+  const gameContext = useContext(GameContext);
+
+  const { gameState } = gameContext || {};
 
   let counter = 0;
 
-  function handleClick(i, j) {
+  function handleClick(i: any, j: any) {
     let newBoardState = [...boardState];
 
-    if (gameState.isActive && newBoardState[i][j] == "") {
+    if (gameState?.isActive && newBoardState[i][j] == "") {
       newBoardState[i][j] = currentSign;
       handleBoardChange(newBoardState);
       currentSign == "x" ? setCurrentSign("o") : setCurrentSign("x");
@@ -20,8 +22,8 @@ function Board({ boardState, handleBoardChange }) {
 
   return (
     <div className={styles.container}>
-      {boardState.map((item, i) => {
-        return item.map((subItem, j) => {
+      {boardState.map((item: any[], i: any) => {
+        return item.map((subItem: string, j: any) => {
           return (
             <div
               key={counter++}
